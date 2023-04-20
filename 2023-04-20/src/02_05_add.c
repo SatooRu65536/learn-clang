@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 int main(int argc, const char* argv[]) {
-  printf("%d + %d = %d\n", 2, 3, 2 + 3);
+  int a = 2;
+  int b = 3;
+  printf("%d + %d = %d\n", a, b, a + b);
 
   return 0;
 }
