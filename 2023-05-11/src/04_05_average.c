@@ -10,6 +10,6 @@ int main(int argc, const char* argv[]) {
   printf("No.3? ");
   scanf("%d", &h3);
   
-  printf("average = %f", (h1 + h2 + h3) / 3.0);
+  printf("average = %f\n", (h1 + h2 + h3) / 3.0);
   return 0;
 }

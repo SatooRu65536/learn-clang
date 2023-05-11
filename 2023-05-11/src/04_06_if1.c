@@ -6,7 +6,7 @@ int main(int argc, const char* argv[]) {
   printf("a? ");
   scanf("%d", &a);
 
-  if (a > 0) printf("aは正の値です");
+  if (a > 0) printf("aは正の値です\n");
 
   return 0;
 }
