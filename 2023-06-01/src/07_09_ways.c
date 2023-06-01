@@ -8,9 +8,13 @@ int main(void) {
   printf("n x? ");
   scanf("%d %d", &n, &x);
 
-  for (int i = n - 2; i <= n; i++) {
-    for (int j = n - 2; j <= n; j++) {
-      for (int k = n - 2; k <= n; k++) {
+  for (int i = 1; i <= n; i++) {
+    for (int j = 1; j <= n; j++) {
+      if (i == j) continue;
+
+      for (int k = 1; k <= n; k++) {
+        if (i == k || j == k) continue;
+
         if (i + j + k == x) {
           printf("%d%d%d\n", i, j, k);
           count += 1;
