@@ -8,9 +8,9 @@ int main(void) {
   scanf("%d %d", &w, &h);
 
   for (int i = 0; i < w; i++) {
-    for (int j = 0; j < h; j++) printf("#");
+    for (int j = 0; j < h; j++) putchar('#');
 
-    printf("\n");
+    putchar('\n');
   }
 
   return 0;
