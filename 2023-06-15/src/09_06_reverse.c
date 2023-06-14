@@ -8,7 +8,7 @@ int main(void) {
     scanf("%d", &input[i]);
   }
 
-  printf("---reversе---\n");
+  printf("---reverse---\n");
   for (int i = 4; i >= 0; i--) printf("input[%d]: %d\n", i, input[i]);
 
   return 0;

@@ -16,7 +16,7 @@ int main(void) {
       break;
 
     default:
-      printf("Dеfaultです.\n");
+      printf("Defaultです.\n");
       break;
   }
 

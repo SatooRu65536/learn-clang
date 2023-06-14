@@ -11,7 +11,7 @@ int main(void) {
   else if (n == 2)
     printf("BBB\n");
   else
-    printf("Dеfaultです.\n");
+    printf("Defaultです.\n");
 
   return 0;
 }
