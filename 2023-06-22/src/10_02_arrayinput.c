@@ -7,8 +7,9 @@ int main(void) {
   for (int i = 0; i < 5; i++) {
     printf("%d人目の身長? ", i + 1);
     scanf("%d", &heights[i]);
-    sum += (double)heights[i];
   }
+
+  for (int i = 0; i < 5; i++) sum += heights[i];
 
   double avg = sum / 5;
   printf("平均身長 = %f\n", avg);
