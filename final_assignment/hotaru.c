@@ -15,7 +15,7 @@ int main(void) {
     localtime_r(&t, &tm);
     sprintf(now, "%02d:%02d", tm.tm_hour, tm.tm_min);
 
-    if (strcmp(now, set_time) == 0) system("mpg321 ./hotaru.mp3");
+    if (strcmp(now, set_time) == 0) system("mpg321 /Users/Shared/hotaru.mp3");
 
     sleep(50);
   }
