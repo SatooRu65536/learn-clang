@@ -1,66 +1,59 @@
-#include <curl/curl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// コールバック関数: レスポンスのデータを受け取る
-void write_callback(void* contents, size_t size, size_t nmemb, char** output) {
-  size_t realsize = size * nmemb;
-  *output = realloc(*output, realsize + 1);
-  if (*output == NULL) {
-    fprintf(stderr, "Memory allocation failed\n");
-    return;
-  }
-  memcpy(*output, contents, realsize);
-  (*output)[realsize] = 0;
+char* getEnv(char *varname);
+void loadEnvFile(char filename[]);
 
-  return;
-}
+int main(char argc, char *argv[]) {
+  // 引数から
+  loadEnvFile(".env");
+  char* github_token = getEnv("GITHUB_TOKEN");
+  char* github_user = getEnv("GITHUB_USER_NAME");
 
-int main(void) {
-  CURL* curl;
-  CURLcode res;
-
-  char* url = "https://api.github.com/users/SatooRu65536/";
-  char* username = "satooru65536";
-  char* output = NULL;
-
-  // libcurlの初期化
-  curl_global_init(CURL_GLOBAL_DEFAULT);
-
-  // CURLオブジェクトの作成
-  curl = curl_easy_init();
-  if (curl) {
-    // URLの設定
-    char request_url[100];
-    sprintf(request_url, url, username);
-    curl_easy_setopt(curl, CURLOPT_URL, request_url);
-
-    // データの受け取り先の設定
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &output);
-
-    // リクエストの送信
-    res = curl_easy_perform(curl);
-
-    // リクエストの結果を処理
-    if (res != CURLE_OK) {
-      fprintf(stderr, "Request failed: %s\n", curl_easy_strerror(res));
-    } else {
-      // レスポンスの処理
-      printf("Response: %s\n", output);
-      // ここでレスポンスのJSONデータを解析して草の数を取得する処理を行います
-    }
-
-    // CURLオブジェクトの解放
-    curl_easy_cleanup(curl);
-  }
-
-  // libcurlの終了
-  curl_global_cleanup();
-
-  // 出力の解放
-  free(output);
+  printf("GITHUB_TOKEN: %s\n", github_token);
+  printf("GITHUB_USER_NAME: %s\n", github_user);
 
   return 0;
+}
+
+char* getEnv(char *varname) {
+  char* value = getenv(varname);
+
+  // 環境変数が存在しない場合
+  if (value == NULL) {
+    printf("環境変数 %s が設定されていません。\n", varname);
+    exit(1);
+  }
+
+  return value;
+}
+
+// ファイルから環境変数を読み込む
+void loadEnvFile(char filename[]) {
+  FILE* file = fopen(filename, "r");
+
+  if (file == NULL) {
+    printf("ファイルを開けませんでした。\n");
+    return;
+  }
+
+  // ファイルから行ごとに読み込み、環境変数に設定
+  char line[256];
+  while (fgets(line, sizeof(line), file) != NULL) {
+    // 改行文字を削除
+    line[strcspn(line, "\n")] = '\0';
+
+    // イコール文字を探し、変数名と値を切り分ける
+    char* equal = strchr(line, '=');
+    if (equal != NULL) {
+      *equal = '\0';
+      char* varname = line;
+      char* value = equal + 1;
+      setenv(varname, value, 1);  // 環境変数に設定
+    }
+  }
+
+  // ファイルを閉じる
+  fclose(file);
 }
