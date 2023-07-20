@@ -1,0 +1,6 @@
+[submodule "2023-07-27/cmm-compiler"]
+	path = 2023-07-27/cmm-compiler
+	url = https://github.com/SatooRu65536/cmm-compiler
+[submodule "2023-07-27/homebrew-cmm"]
+	path = 2023-07-27/homebrew-cmm
+	url = https://github.com/SatooRu65536/homebrew-cmm
