@@ -60,7 +60,7 @@ int main() {
   }
   fclose(inputFile);
 
-  int count = i;
+  int count = 0;
   for (int j = 0; j < i; j++) {
     char intensity = earthquakes[j].earthquakeIntensity;
     double intensityDouble = intensity2double(intensity);
