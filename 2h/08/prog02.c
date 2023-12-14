@@ -1,25 +1,29 @@
 #include <stdio.h>
 
-typedef struct location {
-  double latitude;
-  double longitude;
-  char address[128];
-} Location;
+struct student {
+  char name[64];
+  int age;
+  char id[10];
+  int degree;
+};
 
-void printLocation(char* locationName, Location location) {
-  printf("%s: ", locationName);
-  printf("緯度: %f, 経度: %f, ", location.latitude, location.longitude);
-  printf("住所: %s\n", location.address);
+void printStudent(struct student s) {
+  printf("Name: %s, ", s.name);
+  printf("Age: %d, ", s.age);
+  printf("ID: %s, ", s.id);
+  printf("Degree: %d\n", s.degree);
 }
 
-int main(int argc, const char* argv[]) {
-  Location ait = {35.18480, 137.111525,
-                  "〒470-0356 愛知県豊田市八草町八千草１２４７"};
-  Location meiden = {35.1778635, 136.9464276,
-                     "〒464-0083 愛知県名古屋市千種区若水３丁目２−１２"};
+int main(int argc, const char *argv[]) {
+  struct student s1 = {"satou satoru", 19, "k23076", 1};
+  struct student s2 = {"yamada yama", 20, "k23077", 2};
+  struct student s3 = {"toyama ryuki", 22, "b23714", 1};
+  struct student s4 = {"penguin cute", 13, "k23075", 1};
 
-  printLocation("愛知工業大学", ait);
-  printLocation("名電", meiden);
+  printStudent(s1);
+  printStudent(s2);
+  printStudent(s3);
+  printStudent(s4);
 
   return 0;
 }
