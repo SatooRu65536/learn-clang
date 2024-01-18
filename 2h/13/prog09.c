@@ -72,9 +72,7 @@ void freeMelem(Melem *root) {
   free(root);
 }
 
-int main(void) {
-  Melem *root = NULL;
-
+Melem *execCmdLoop(Melem *root) {
   char input[128];
   char *cmd;
   char name[64];
@@ -109,6 +107,21 @@ int main(void) {
     }
     getchar();
   } while (*cmd != 'q');
+
+  return root;
+}
+
+int main(void) {
+  Melem *root = NULL;
+
+  char input[128];
+  char *cmd;
+  char name[64];
+  int height, weight;
+
+  printf("a: 追加, d: 削除, p: 表示, q: 終了\n");
+
+  root = execCmdLoop(root);
 
   freeMelem(root);
 

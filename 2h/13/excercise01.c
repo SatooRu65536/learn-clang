@@ -72,33 +72,11 @@ void freeMelem(Melem *root) {
   free(root);
 }
 
-int main(void) {
-  Melem *root = NULL;
-
-  // ----- ファイル読み込み -----
-  FILE *file;
-  char line[256];
-
-  file = fopen("meibo.csv", "r");
-  if (file == NULL) {
-    printf("ファイルを開けませんでした。\n");
-    return 1;
-  }
-
-  char name[64];
-  int height, weight;
-  // ファイルから1行ずつ読み込む
-  while (fgets(line, sizeof(line), file) != NULL) {
-    strcpy(name, strtok(line, ","));
-    height = atoi(strtok(NULL, ","));
-    weight = atoi(strtok(NULL, ","));
-    root = addMelem(root, name, height, weight);
-  }
-  fclose(file);
-
-  // ----- ユーザ入力 -----
+Melem *execCmdLoop(Melem *root) {
   char input[128];
   char *cmd;
+  char name[64];
+  int height, weight;
 
   printf("a: 追加, d: 削除, p: 表示, q: 終了\n");
 
@@ -130,12 +108,40 @@ int main(void) {
     getchar();
   } while (*cmd != 'q');
 
-  // ----- ファイル書き込み -----
+  return root;
+}
 
-  file = fopen("meibo.csv", "w");
+Melem *readFile(Melem *root, char *filename) {
+  FILE *file;
+  char line[256];
+
+  file = fopen(filename, "r");
   if (file == NULL) {
     printf("ファイルを開けませんでした。\n");
-    return 1;
+    return root;
+  }
+
+  char name[64];
+  int height, weight;
+  // ファイルから1行ずつ読み込む
+  while (fgets(line, sizeof(line), file) != NULL) {
+    strcpy(name, strtok(line, ","));
+    height = atoi(strtok(NULL, ","));
+    weight = atoi(strtok(NULL, ","));
+    root = addMelem(root, name, height, weight);
+  }
+  fclose(file);
+
+  return root;
+}
+
+void writeFile(Melem *root, char *filename) {
+  FILE *file;
+
+  file = fopen(filename, "w");
+  if (file == NULL) {
+    printf("ファイルを開けませんでした。\n");
+    return;
   }
 
   Melem *p = root;
@@ -143,6 +149,16 @@ int main(void) {
     fprintf(file, "%s,%d,%d\n", p->name, p->height, p->weight);
     p = p->next;
   }
+
+  fclose(file);
+}
+
+int main(void) {
+  Melem *root = NULL;
+
+  root = readFile(root, "meibo.csv");
+  root = execCmdLoop(root);
+  writeFile(root, "meibo.csv");
 
   freeMelem(root);
 

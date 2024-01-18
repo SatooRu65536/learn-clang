@@ -72,16 +72,14 @@ void freeMelem(Melem *root) {
   free(root);
 }
 
-int main(void) {
-  Melem *root = NULL;
-
+Melem *readFile(Melem *root, char *filename) {
   FILE *file;
   char line[256];
 
-  file = fopen("meibo.csv", "r");
+  file = fopen(filename, "r");
   if (file == NULL) {
     printf("ファイルを開けませんでした。\n");
-    return 1;
+    return root;
   }
 
   char name[64];
@@ -94,6 +92,14 @@ int main(void) {
     root = addMelem(root, name, height, weight);
   }
   fclose(file);
+
+  return root;
+}
+
+int main(void) {
+  Melem *root = NULL;
+
+  root = readFile(root, "meibo.csv");
 
   printMelem(root);
   freeMelem(root);
