@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-unsigned rrotate(unsigned x, int n) {
+unsigned rrotate(unsigned int x, int n) {
   int w = sizeof(int) << 3;
   return (x >> n) | (x << (w - n));
 }
 
-unsigned lrotate(unsigned x, int n) {
+unsigned lrotate(unsigned int x, int n) {
   int w = sizeof(int) << 3;
   return (x << n) | (x >> (w - n));
 }
@@ -17,7 +17,7 @@ void printbin(unsigned int x) {
 }
 
 int main(void) {
-  unsigned x;
+  unsigned int x;
 
   scanf("%u", &x);
   printbin(x);
