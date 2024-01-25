@@ -20,6 +20,10 @@ int main(void) {
   unsigned x;
 
   scanf("%u", &x);
+  printbin(x);
+  printf("\n");
+  printbin(rrotate(x, 1));
+  printf("\n");
   printbin(lrotate(x, 1));
 
   return 0;
