@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 unsigned rrotate(unsigned int x, int n) {
-  int w = sizeof(int) << 3;
+  unsigned int w = sizeof(unsigned int) << 3;
   return (x >> n) | (x << (w - n));
 }
 
 unsigned lrotate(unsigned int x, int n) {
-  int w = sizeof(int) << 3;
+  unsigned int w = sizeof(unsigned int) << 3;
   return (x << n) | (x >> (w - n));
 }
 
