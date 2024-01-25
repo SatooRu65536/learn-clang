@@ -2,12 +2,12 @@
 
 unsigned rrotate(unsigned int x, int n) {
   unsigned int w = sizeof(unsigned int) << 3;
-  return (x >> n) | (x << (w - n));
+  return 255 & ((x >> n) | (x << (w - n)));
 }
 
 unsigned lrotate(unsigned int x, int n) {
   unsigned int w = sizeof(unsigned int) << 3;
-  return (x << n) | (x >> (w - n));
+  return 255 & (x << n) | (x >> (w - n));
 }
 
 void printbin(unsigned int x) {
