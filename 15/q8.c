@@ -64,9 +64,9 @@ int main(void) {
 
   double survivor_ratio = survivors_nums[0] / (double)nums[0];
   printf("子供生還割合：%f％, ", survivor_ratio * 100);
-  survivor_ratio = survivors_nums[0] / (double)nums[0];
+  survivor_ratio = survivors_nums[1] / (double)nums[1];
   printf("大人生還割合：%f％, ", survivor_ratio * 100);
-  survivor_ratio = survivors_nums[0] / (double)nums[0];
+  survivor_ratio = survivors_nums[2] / (double)nums[2];
   printf("老人生還割合：%f％\n", survivor_ratio * 100);
 
   free(passengers);

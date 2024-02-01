@@ -56,9 +56,9 @@ int main(void) {
     age_sums[survival] += passengers[i].age;
   }
 
-  double avg_age = age_sums[0] / (double)nums[0];
+  double avg_age = age_sums[1] / (double)nums[1];
   printf("生還者平均年齢：%f歳, ", avg_age);
-  avg_age = age_sums[1] / (double)nums[1];
+  avg_age = age_sums[0] / (double)nums[0];
   printf("死亡者平均年齢：%f歳\n", avg_age);
 
   free(passengers);
