@@ -27,7 +27,7 @@ void dispPassenger(Passenger p) {
 
 int main(void) {
   int passenger_num = 0;
-  Passenger *passengers = (Passenger *)malloc(sizeof(Passenger) * 1000);
+  Passenger *passengers = (Passenger *)malloc(sizeof(Passenger));
 
   char line[LINE_MAX];
   FILE *fp = fopen("titanic.csv", "r");
